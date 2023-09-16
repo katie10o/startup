@@ -1,2 +1,2 @@
 # startup
-Silna is a start-up business  calss assignment for cs 260
+Silna is a start-up business  class assignment for cs 260
