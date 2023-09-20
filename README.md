@@ -8,22 +8,22 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 ![User's Home Page](https://github.com/katie10o/startup/blob/main/images/silna_roughDraft.png)
 
 ### Key Features
-- Secure login over HTTPS
-- Ability to enter and log your meals and snacks
-- Ability to select the different types of body essential nutrients and see where you are with subgroup     (updated in real-time)
-- A fun illustration that demonstrates where you are at with your goal of obtaining the recommended nutrients (updated in real-time)
-- A settings page for you to edit your personal information
-- Not shown in my design - but a log of the foods you've been eating for the past month
-- Also not shown, but the opportunity to share food combinations that have helped you diversify your nutritional intake so that other users can benefit in their health journey as well
+- Secure login over HTTPS.
+- Ability to enter and log your meals and snacks.
+- Ability to select the different types of body essential nutrients and see where you are with subgroup     (updated in real-time).
+- A fun illustration that demonstrates where you are at with your goal of obtaining the recommended nutrients (updated in real-time).
+- A settings page for you to edit your personal information.
+- Not shown in my design - but a log of the foods you've been eating for the past month.
+- Also not shown, but the opportunity to share food combinations that have helped you diversify your nutritional intake so that other users can benefit in their health journey as well.
 
 
 ### Technologies 
 - HTML: Creation of 4 HTML pages: login page, daily food log page, food log history, and setting. 
 - CSS: Adding styling benefits that make my webpage look nice and professional for all screens.
-- JavaScript: Interactives like button pressing for users to enter in their food intake
-- Service: connects to websites that contain the nutritional information for foods
-- DB: Stores meal info and favorite/typical meal options
-- Login: creation of accounts and ability to login securely
-- WebSocket: Sending and seeing recipes or food combos of other users
-- React: using React web framework for routing requests
+- JavaScript: Interactives like button-pressing for users to enter in their food intake.
+- Service: connects to websites that contain the nutritional information for foods.
+- DB: Stores meal info and favorite/typical meal options.
+- Login: creation of accounts and ability to login securely.
+- WebSocket: Sending and seeing recipes or food combos from other users.
+- React: using React web framework for routing requests.
 
