@@ -27,3 +27,13 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 - WebSocket: Sending and seeing recipes or food combos from other users.
 - React: using React web framework for routing requests.
 
+
+### HTML
+- 5 HTML pages that represent the login, the main "home" screen, the weekly food log, the settings page, and details on overall food intake.
+- Links between all the pages. There are links to various trusted health sources if the user wants more information.
+- Textual descriptions prompting the user for inputs and overall organization
+- Tables for organization with food essential categories
+- A hand-drawn image that will be used to show the overall percentage of weekly food intake (in the process of getting it to work)
+- Database representation with user login information, weekly food logs, and overall essential food intake for the day
+- Websocket placement for a connection to an API when a user enters their food intake - it will connect to an API for all the nutritional information (I haven't found one yet though.. )
+
