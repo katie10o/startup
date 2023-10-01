@@ -21,7 +21,7 @@ domain name is silnawellness.com
 to launch html files on to my server:
 
 first type this code:
-./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s simon 
+./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s simon (simon is in services folder to see full packages look at services/simon/public)
 (^ make sure this copy reaches to your file)
 
 and then from the simon folder move to /usr/share/caddy 
