@@ -16,3 +16,13 @@ chmod 600 path/to/PemKey/file - restricting access for other users? safety measu
 ls -l (listing all the files with the long format)
 
 my ip address: 44.219.3.88
+domain name is silnawellness.com
+
+to launch html files on to my server:
+
+first type this code:
+./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s simon 
+(^ make sure this copy reaches to your file)
+
+and then from the simon folder move to /usr/share/caddy 
+
