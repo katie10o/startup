@@ -1,0 +1,98 @@
+
+/* colors: 
+#c49c56 - djon mustard yellow
+#871a37 - maroon
+#DED1BD - sand beige
+#d2d4d3 - off white
+#000000 - black
+#a79990 - grey
+#008080 - teal
+*/
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+
+.main_flex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.flex.nav {
+    padding: 5px;
+    background-color: #008080;
+    padding: auto;
+    display: flex;
+}
+.flex.nav a{
+    padding-left: 10px;
+    text-decoration: none;
+    color: #000;
+}
+.flex.title {
+    padding: 10px;
+    display: flex;
+}
+.flex.title h3 {
+    padding-left: 100px;
+    font-size: 80px;
+}
+
+.flex.activity {
+    background-color: #DED1BD;
+    justify-content: space-between;
+    display: flex;
+}
+.activity{
+    flex:1;
+}
+.activity.right {
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+}
+.activity.right input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 300px;
+}
+.activity.right button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 300px;
+    font-size: 15px;
+    background-color: #c49c56;
+}
+button a {
+    text-decoration: none;
+    color: #000;
+}
+
+.activity.left {
+    align-items: center;
+    display: flex;
+}
+.activity.left img {
+    
+    width: auto;
+    height: 500px;
+}
+
+.flex.footer{
+    display: flex;
+}
+.flex.footer a {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    display: flex;
+    text-decoration: none;
+    color: #000;
+}
+
+
