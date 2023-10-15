@@ -1,22 +1,43 @@
-<!-- <form class>
-                <label for="first_name">First Name: </label>
-                <input type="first_name" id="first_name" name="varFirstName" />
-            
-                <label for="last_name">Last Name: </label>
-                <input type="last_name" id="last_name" name="varLastName" />
 
-                <label for="weight">Weight: </label>
-                <input type="weight" id="weight" name="varWeight" />
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Silna</title>
+    
+        <link rel="stylesheet" href="signup.css" />
 
-                <label for="height">Height: </label>
-                <input type="height" id="height" name="varHeight" />
+        <!-- Include bootstrap CSS framework -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+        </head>
+        <body>
+        <div class="main_flex">
+            <div class="flex nav">
+                <h3>Sign up for Silna</h3>
+            </div>
 
-                <label for="email">Email: </label>
-                <input type="email" id="email" name="varEmail" />
+            <div class="flex activity">
+                <h3>Enter the Following:</h3>
+                <form class="signup">
+                    <input type="first_name" id="first_name" name="varFirstName" placeholder="First Name"/>
+                
+                    <input type="last_name" id="last_name" name="varLastName" placeholder="Last Name"/>
 
-                <label for="password">Password: </label>
-                <input type="password" id="password" name="varPassword" />
-                <button>
-                    <a href="silna_main.html">Submit</a>
-                </button>
-            </form> -->
+                    <input type="email" id="email" name="varEmail" placeholder="Email"/>
+
+                    <input type="password" id="password" name="varPassword" placeholder="Password"/>
+                    <button>
+                        <a href="silna_main.html">Submit</a>
+                    </button>
+                </form>
+            </div>
+        </div>
+        </body>
+</html>

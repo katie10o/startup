@@ -24,14 +24,10 @@ html, body {
 .flex.nav {
     padding: 5px;
     background-color: #008080;
-    padding: auto;
+    padding: 20px;
     display: flex;
 }
-.flex.nav a{
-    padding-left: 10px;
-    text-decoration: none;
-    color: #000;
-}
+
 .flex.title {
     padding: 10px;
     display: flex;
