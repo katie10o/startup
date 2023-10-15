@@ -37,3 +37,11 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 - Database representation with user login information, weekly food logs, and overall essential food intake for the day
 - Websocket placement for a connection to an API when a user enters their food intake - it will connect to an API for all the nutritional information (I haven't found one yet though.. )
 
+### CSS
+- after seeing how much work went into my css, I decided to scale back a bit. I forwent the meal log (since the point of the website is to track nutrients, not meals per se)
+- I have header, body, and footer on the main page as well in other pages
+- My website is responsive to window resizing
+- I have consistant fonts and color schemes throughout the web app
+- I have mulitple images that look nice and professional
+- I have a mixture of UI's for enjoyment and ease
+
