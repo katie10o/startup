@@ -1,0 +1,50 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: o;
+}
+
+.main_flex {
+    flex-direction: column;
+    display: flex;
+    height: 100%;
+}
+.flex.nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #008080;
+    padding: 5px;
+    margin-bottom: 50px;
+}
+.flex.nav h4{
+    padding-left: 10px;
+}
+.nav_links {
+    justify-content: end;
+}
+
+.nav_links a{
+    padding-right: 20px;
+    text-decoration: none;
+    color: #000;
+}
+.flex.activity {
+    flex-direction: column;
+    background-color: #DED1BD;
+    display: flex;
+}
+.flex.activity p{
+    font-size: 20px;
+    margin-left: 50px;
+}
+.flex.activity button {
+    font-size: 15px;
+    margin-left: 50px;
+    width: 225px;
+    margin-bottom: 10px;
+    background-color: #c49c56;
+}
+button a{
+    color: #000;
+    text-decoration: none;
+}

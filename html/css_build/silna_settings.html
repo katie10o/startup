@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Silna</title>
     
-        <link rel="stylesheet" href="signup.css" />
+        <link rel="stylesheet" href="settings.css" />
 
         <!-- Include bootstrap CSS framework -->
         <link
@@ -20,23 +20,24 @@
         <body>
         <div class="main_flex">
             <div class="flex nav">
-                <div class="flex nav">
-                    <h4 class="user">Welcome [user]</h4>
-                    <div class="nav_links">
-                        <a href="silna_overview.html">Nutrient Details</a>
-                        <a href="silna_settings.html">Settings</a>
-                    </div>
+                <h4 class="user">Welcome [user]</h4>
+                <div class="nav_links">
+                    <a href="silna_main.html">Main</a>
                 </div>
             </div>
             <div class="flex activity">
-                <form class="edit">
+                <div class="edit">
                     <h4>Your profile</h4>
                     <p>[first name] [last name]</p>
                     <p>[email]</p>
                     <p>[password *****]</p>
                     <button>Edit</button>
+                    <button>
+                        <a href="index.html">Logout</a>
+                    </button>
                     <p>With JavaScript, the edit button will be able to edit the fields above</p>
-                </form>
+                    
+                </div>
             </div>
         </div>
         </body>
