@@ -1,157 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-    <header>
-        <h5>Welcome [user]</h5>
-        <button>Meals</button>
-        <button>Nutrients</button>
-        <button>Settings</button>
-    </header>
-    <body>
-        <h1>Silna</h1>
-        <button>
-            <a href="silna_settings.html">Settings</a>
-        </button>
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Silna</title>
+    
+        <link rel="stylesheet" href="main.css" />
 
-        <h3>Log Your Meals: </h3>
-        <h4>Breakfast:</h4>
-        <p>When food is entered, 3rd party service will extract the nutritional values (havent food one though)</p>
+        <!-- Include bootstrap CSS framework -->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous"
+        />
+      </head>
 
-            <label for="1food">Food item:  </label>
-            <input type="1food" id="1food" name="var1food" /> 
-            <button>Enter</button>  
+      <body>
+        <div class="main_flex">
+    
+            <div class="flex nav">
+                <h4 class="user">Welcome [user]</h4>
+                <div class="nav_links">
+                    <a href="silna_overview.html">Nutrient Details</a>
+                    <a href="silna_settings.html">Settings</a>
+                </div>
+            </div>
+    
+            <div class=" flex activity">
+                <div class="activity left">
+                    <h3>Meal Input</h3>
+                    <select id="meal_type" name="meal">
+                        <option value="s" selected>Select meal...</option>
+                        <option value="b">Breakfast</option>
+                        <option value="l">Lunch</option>
+                        <option value="d">Dinner</option>
+                        <option value="w">Water Input</option>
+                    </select>
+                    <input type="text" id="meal-input" placeholder="Enter Meal" >
+                    <button class="enter">Enter</button> 
 
-            <label for="2food">Food item:  </label>
-            <input type="2food" id="2food" name="var2food" />
-            <button>Enter</button>
-
-            <label for="3food">Food item:  </label>
-            <input type="3food" id="3food" name="var3food" />
-            <button>Enter</button>
-
-            <label for="4food">Food item:  </label>
-            <input type="4food" id="4food" name="var4food" />
-            <button>Enter</button>
-
-            <label for="5food">Food item:  </label>
-            <input type="5food" id="5food" name="var5food" />
-            <button>Enter</button>
-
+                    <table>
+                        <tr>
+                            <th class="meal_category">Meal</th>
+                            <th class="items">Items </th>
+                        </tr>
+                        <tr>
+                            <td class="meal_category">Breakfast</td>
+                            <td class="items">Items entered... </td>
+                        </tr>
+                        <tr>
+                            <td class="meal_category">Lunch</td>
+                            <td class="items">Items entered... </td>
+                        </tr>
+                        <tr>
+                            <td class="meal_category">Dinner</td>
+                            <td class="items">Items entered... </td>
+                        </tr>
+                        <tr>
+                            <td class="meal_category">Snacks</td>
+                            <td class="items">Items entered... </td>
+                        </tr>
+                        <tr>
+                            <td class="meal_category">Water</td>
+                            <td class="items">Items entered... </td>
+                        </tr>
+                   </table>
+                </div>
+                <div class="activity right">
+                    <h3>Nutrients</h3>
+                    <select id="nuts_type" name="nutrients">
+                        <option value="s" selected>Select Nutrient...</option>
+                        <option value="m">Minerals</option>
+                        <option value="v">Vitamins</option>
+                        <option value="p">Protien</option>
+                        <option value="f">Fats</option>
+                        <option value="c">Carbs</option>
+                    </select>
+                    <p>This is where the weekly percent of nutrient goal would pop up based on the users selection. For example, if minerals were selected...</p>
+                    <p class="num">47%</p>
+                    <p class="explain">of the weekly [mineral] intake completed! Way to go!</p>
+    
+                </div>
+                
+            </div>
+            <div class="flex image">
+                <img src="spoons.jpg"> 
+            </div>
             
-
-        <h4>Lunch:</h4>
-        <p>When food is entered, 3rd party service will extract the nutritional values (havent food one though)</p>
-
-
-        <label for="6food">Food item:  </label>
-        <input type="6food" id="6food" name="var6food" />
-        <button>Enter</button>
-        
-        <label for="7food">Food item:  </label>
-        <input type="7food" id="7food" name="var7food" />
-        <button>Enter</button>
-
-        <label for="8food">Food item:  </label>
-        <input type="8food" id="8food" name="var8food" />
-        <button>Enter</button>
-
-        <label for="9food">Food item:  </label>
-        <input type="9food" id="9food" name="var9food" />
-        <button>Enter</button>
-
-        <label for="10food">Food item:  </label>
-        <input type="10food" id="10food" name="var10food" />
-        <button>Enter</button>
-
-        <h4>Dinner:</h4>
-        <p>When food is entered, 3rd party service will extract the nutritional values (havent food one though)</p>
-
-
-        <label for="11food">Food item:  </label>
-        <input type="11food" id="11food" name="var11food" />
-        <button>Enter</button>
-        
-        <label for="12food">Food item:  </label>
-        <input type="12food" id="12food" name="var12food" />
-        <button>Enter</button>
-        
-        <label for="13food">Food item:  </label>
-        <input type="13food" id="13food" name="var13food" />
-        <button>Enter</button>
-        
-        <label for="14food">Food item:  </label>
-        <input type="14food" id="14food" name="var14food" />
-        <button>Enter</button>
-        
-        <label for="15food">Food item:  </label>
-        <input type="15food" id="15food" name="var15food" />
-        <button>Enter</button>
-
-
-        <h4>Snacks:</h4>
-        <p>When food is entered, 3rd party service will extract the nutritional values (havent food one though)</p>
-
-
-        <label for="16food">Food item:  </label>
-        <input type="16food" id="16food" name="var16food" />
-        <button>Enter</button>
-        
-        <label for="17food">Food item:  </label>
-        <input type="17food" id="17food" name="var17food" />
-        <button>Enter</button>
-        
-        <label for="18food">Food item:  </label>
-        <input type="18food" id="18food" name="var18food" />
-        <button>Enter</button>
-        
-        <label for="19food">Food item:  </label>
-        <input type="19food" id="19food" name="var19food" />
-        <button>Enter</button>
-        
-        <label for="20food">Food item:  </label>
-        <input type="20food" id="20food" name="var20food" />
-        <button>Enter</button>
-
-        <h4>Water:</h4>
-        <p>Goal: 120 oz. per day (this will be a range determined by users personal info when they sign up (database))</p>
-            <label for="water">Water (oz.):  </label>
-            <input type="water" id="water" name="varWater" />
-            <button>Enter</button>
-
-        <button>
-            <a href="silna_weekly.html">Click to see weekly food log</a>
-        </button>
-
-
-        <h3>Your Health:</h3>
-        <h4>Minerals:</h4>
-        <p>Overall: </p>
-        <p>[Percentage of overall mineral intake]</p>
-
-        <h4>Vitamins:</h4>
-        <p>Overall: </p>
-        <p>[Percentage of overall vitamin intake]</p>
-        
-        <h4>Protiens:</h4>
-        <p>Overall: </p>
-        <p>[Percentage of overall protien intake]</p>
-        
-        <h4>Fats:</h4>
-        <p>Overall: </p>
-        <p>[Percentage of overall mineral intake]</p>
-
-        <h4>Carbs:</h4>
-        <p>Overall: </p>
-        <p>[Percentage of overall mineral intake]</p>
-
-        <button>
-            <a href="silna_overview.html">Click to see detials</a>
-        </button>
-
-        <img src="muscle_broccoli.PNG" alt="You can do it!" >
-        <button>
-            <a href="index.html">Log Out</a>
-    </button>
-        
+        </div>
     </body>
 
 </html>
+
