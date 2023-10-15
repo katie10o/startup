@@ -1,13 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-    <header>
-        <h5>Welcome [user]</h5>
-        <button>Main</button>
-        <button>Meals</button>
-        <button>Settings</button>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Silna</title>
+    
+        <link rel="stylesheet" href="nutrients.css" />
+
+        <!-- Include bootstrap CSS framework -->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous"
+        />
+      </head>
+
     <body>
-        <h4>Minerals:</h4>
+        <div class="main_flex">
+            <div class="flex nav">
+                <h4 class="user">Welcome [user]</h4>
+                <div class="nav_links">
+                    <a href="silna_main.html">Main</a>
+                    <a href="silna_settings.html">Settings</a>
+                </div>
+            </div>
+            <div class="flex activity">
+                <div class="activity left">
+                    <h3>Nutrients</h3>
+                    <select id="nuts_type" name="nutrients">
+                        <option value="s" selected>Select Nutrient...</option>
+                        <option value="m">Minerals</option>
+                        <option value="v">Vitamins</option>
+                        <option value="p">Protien</option>
+                        <option value="f">Fats</option>
+                        <option value="c">Carbs</option>
+                    </select>
+                    <p>Based on what the user selects, the table will pop up with their detailed weekly summary. This is in the example of carbs:</p>
+                    <table class="example" border="1">
+                        <tr>
+                            <th>Carbs</th>
+                            <th>Intake Percentage:</th>
+                        </tr>
+                        <tr>
+                            <td>Sugars</td>
+                            <td>25% [Websocket data placeholder from inputed foods]</td>
+                        </tr>
+                        <tr>
+                            <td>Starch </td>
+                            <td>25% [Websocket data placeholder from inputed foods]</td>
+                        </tr>
+                        <tr>
+                            <td>Fiber</td>
+                            <td>25% [Websocket data placeholder from inputed foods]</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="activity right">
+                    <img src="food2.jpg">
+                </div>
+    
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+<!-- <h4>Minerals:</h4>
         <table border="1">
             <tr>
                 <th>Mineral:</th>
@@ -250,11 +312,4 @@
             </tr>
         </table>
         <p>Source:</p>
-        <a href="https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/carbohydrates/art-20045705">Mayo Clinic</a>
-
-        <button>
-            <a href="silna_main.html">Back to main</a>
-        </button>
-
-    </body>
-</html>
+        <a href="https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/in-depth/carbohydrates/art-20045705">Mayo Clinic</a> -->

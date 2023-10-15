@@ -102,3 +102,14 @@ table {
     width: 100%;
     height: 400px;
 }
+.logout{
+    display: flex;
+    background-color: #871a37;
+}
+.logout a{
+    padding-left: 10px;
+    padding-bottom: 10px;
+    color: #DED1BD;
+    text-decoration: none;
+    font-size: 15px;
+}
