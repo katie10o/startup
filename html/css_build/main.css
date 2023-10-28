@@ -67,13 +67,27 @@ html, body {
     text-decoration: none;
     color: #000;
 }
-table {
+.activity.left table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 2px solid black;
     margin-left: 10px;
     margin-bottom: 20px;
     font-size: 20px;
     width: 100%;
-    border: 2px solid;
 }
+.activity.left .meal_category{
+    width: 20%;
+}
+.activity.left .items{
+    width: 80%;
+
+}
+.activity.left th, .activity.left td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
 
 
 .activity.right {
@@ -89,11 +103,13 @@ table {
     width: 600px;
 }
 .num {
+    display: none;
     text-align: center;
     font-size: 80px;
     width: 600px;
 }
 .explain {
+    display: none;
     text-align: center;
     font-size: 20px;
     width: 600px;

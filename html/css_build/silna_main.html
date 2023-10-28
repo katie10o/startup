@@ -37,10 +37,11 @@
                         <option value="b">Breakfast</option>
                         <option value="l">Lunch</option>
                         <option value="d">Dinner</option>
+                        <option value="sn">Snacks</option>
                         <option value="w">Water Input</option>
                     </select>
-                    <input type="text" id="meal-input" placeholder="Enter Meal" >
-                    <button class="enter">Enter</button> 
+                    <input type="text" id="meal-input" placeholder="Enter Meal" style="display: none;">
+                    <button class="enter" id="enter">Enter</button> 
 
                     <table>
                         <tr>
@@ -49,23 +50,23 @@
                         </tr>
                         <tr>
                             <td class="meal_category">Breakfast</td>
-                            <td class="items">Items entered... </td>
+                            <td class="items"></td>
                         </tr>
                         <tr>
                             <td class="meal_category">Lunch</td>
-                            <td class="items">Items entered... </td>
+                            <td class="items"></td>
                         </tr>
                         <tr>
                             <td class="meal_category">Dinner</td>
-                            <td class="items">Items entered... </td>
+                            <td class="items"></td>
                         </tr>
                         <tr>
                             <td class="meal_category">Snacks</td>
-                            <td class="items">Items entered... </td>
+                            <td class="items"></td>
                         </tr>
                         <tr>
                             <td class="meal_category">Water</td>
-                            <td class="items">Items entered... </td>
+                            <td class="items"></td>
                         </tr>
                    </table>
                 </div>
@@ -79,9 +80,9 @@
                         <option value="f">Fats</option>
                         <option value="c">Carbs</option>
                     </select>
-                    <p>This is where the weekly percent of nutrient goal would pop up based on the users selection. For example, if minerals were selected...</p>
+                    <p>This is where the weekly percent of nutrient goal would pop up based on the users selection.</p>
                     <p class="num">47%</p>
-                    <p class="explain">of the weekly [mineral] intake completed! Way to go!</p>
+                    <p class="explain">of the weekly <span id ="selected_nutr"></span> intake completed! Way to go!</p>
     
                 </div>
                 
