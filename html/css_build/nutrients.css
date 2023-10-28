@@ -51,8 +51,14 @@ html, body {
     display: flex;
     flex-wrap: wrap;
 }
+table th, table td{
+    border: 2px solid black;
 
+}
 
+#mineral, #vitamin, #protien, #omega3, #omega6, #carb {
+    display: none;
+}
 
 .activity.left {
     flex-direction: column;
@@ -89,7 +95,6 @@ table {
     margin-bottom: 20px;
     font-size: 20px;
     width: 100%;
-    border: 2px solid;
 }
 .activity.right {
     align-items: center;
