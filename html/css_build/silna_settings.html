@@ -20,7 +20,7 @@
         <body>
         <div class="main_flex">
             <div class="flex nav">
-                <h4 class="user">Welcome [user]</h4>
+                <h4 class="user">Welcome <span id="userEmail"></span></h4>
                 <div class="nav_links">
                     <a href="silna_main.html">Main</a>
                 </div>
@@ -28,17 +28,26 @@
             <div class="flex activity">
                 <div class="edit">
                     <h4>Your profile</h4>
-                    <p>[first name] [last name]</p>
-                    <p>[email]</p>
-                    <p>[password *****]</p>
-                    <button>Edit</button>
+                    <p> Name: <span id="nameDisplay">first name last name</span></p>
+                    <input type="text" id="nameEdit" placeholder="First Name Last Name" style="display:none;">
+
+                    <p>Email: <span id="emailDisplay">email </span></p>
+                    <input type="text" id="emailEdit" placeholder="Email" style="display:none;">
+
+                    <p>Password:<span id="passwordDisplay">**</span> </p>
+                    <input type="text" id="passEdit" placeholder="Password" style="display:none;">
+
+                    <button id="editBtn">Edit</button>
+                    <button id="saveBtn" style="display:none;">Save</button>
+                    <br>
                     <button>
                         <a href="index.html">Logout</a>
                     </button>
-                    <p>With JavaScript, the edit button will be able to edit the fields above</p>
                     
                 </div>
-            </div>
+            </input>
         </div>
+        <script src="settings.js">
+        </script>
         </body>
 </html>
