@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<body>
+    <pre>
+        
+    </pre>
+    <script>
+        const url = "https://api.chucknorris.io/jokes/random?category=dev"
+        // const url ="https://api.quotable.io/random"
+        fetch(url)
+        // this works
+        .then(r => r.json())
+        .then(j => console.log(j.value))
+
+        // this is not really working
+        // const r = await fetch('https://api.quotable.io/random')
+        // const j = await r.json()
+        // console.log(j.value)
+
+        // missed class part :/
+        // .then((x) => )
+    </script>
+
+</body>
