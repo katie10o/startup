@@ -45,3 +45,9 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 - I have mulitple images that look nice and professional
 - I have a mixture of UI's for enjoyment and ease
 
+
+### JavaScript
+-I've created nice elements that allow for optimal user interface
+-I have built a sign up, login, and settings page and implemented JavaScript code in preparation for database login 
+-I have logistical methods in JavaScript for when users interact with my website
+-Though it was not specificed on my website, I know the location of where the websocket will be interacting with my JS code and website (with meal inputs)
