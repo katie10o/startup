@@ -112,10 +112,16 @@ table {
     color: #DED1BD;
     text-decoration: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 425px) {
     .activity.right img {
+        display: none;
         max-width: 300px; 
         max-height: 100%; 
+    }
+    .activity.left select,
+    .activity.left input {
+        width: 100%;
+        margin: 5px 0; 
     }
 }
 @media (max-width: 768px) {

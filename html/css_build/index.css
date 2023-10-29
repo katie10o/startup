@@ -91,6 +91,7 @@ button a {
 }
 @media (max-width: 768px) {
     .activity.left img {
+        display: none;
         max-width: 100%; 
         max-height: 300px; 
     }

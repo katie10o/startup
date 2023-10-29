@@ -115,10 +115,13 @@ html, body {
     width: 600px;
 }
 .flex.image img {
+    align-items: center;
     width: 100%;
     height: 400px;
 }
-.logout{
+footer.logout{
+    bottom: 0;
+    width: 100%;
     display: flex;
     background-color: #871a37;
 }
@@ -129,12 +132,23 @@ html, body {
     text-decoration: none;
     font-size: 15px;
 }
-@media (max-width: 768px) {
+.activity.left .meal_type,
+.activity.right select{
+    max-width: 500px; 
+    margin: 10px 0; 
+}
+
+
+@media (min-width: 350px) {
     .flex.activity {
         flex-direction: column; 
         padding-left: 10px; 
         padding-right: 10px; 
         
+    }
+
+    .activity.left table {
+        margin-left: 0; 
     }
 }
 
