@@ -1,0 +1,154 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main_flex {
+    flex-direction: column;
+    display: flex;
+    height: 100%;
+}
+.flex.nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #008080;
+    padding: 5px;
+    margin-bottom: 50px;
+}
+.flex.nav h4{
+    padding-left: 10px;
+}
+.nav_links {
+    justify-content: end;
+}
+.nav_links a{
+    padding-right: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.flex.activity {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+    background-color: #DED1BD;
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity.left {
+    flex-direction: column;
+    display: flex;
+    margin-right: 70px;
+}
+.activity.left h3{
+    padding-top: 10px;
+}
+.activity.left select {
+    align-self: center;
+    font-size: 20px;
+    width: 600px;
+    margin-bottom: 10px;
+}
+.activity.left input {
+    align-self: center;
+    font-size: 20px;
+    width: 600px;
+    margin-bottom: 10px;
+}
+.activity.left button {
+    background-color: #c49c56;
+    align-self: center;
+    font-size: 20px;
+    width: 300px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
+}
+.activity.left table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 2px solid black;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    width: 100%;
+}
+.activity.left .meal_category{
+    width: 20%;
+}
+.activity.left .items{
+    width: 80%;
+
+}
+.activity.left th, .activity.left td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+
+
+.activity.right {
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+}
+.activity.right h3{
+    padding-top: 10px;
+}
+.activity.right select {
+    font-size: 20px;
+    width: 600px;
+}
+.num {
+    display: none;
+    text-align: center;
+    font-size: 80px;
+    width: 600px;
+}
+.explain {
+    display: none;
+    text-align: center;
+    font-size: 20px;
+    width: 600px;
+}
+.flex.image img {
+    align-items: center;
+    width: 100%;
+    height: 400px;
+}
+footer.logout{
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background-color: #871a37;
+}
+.logout a{
+    padding-left: 10px;
+    padding-bottom: 10px;
+    color: #DED1BD;
+    text-decoration: none;
+    font-size: 15px;
+}
+.activity.left .meal_type,
+.activity.right select{
+    max-width: 500px; 
+    margin: 10px 0; 
+}
+
+
+@media (min-width: 350px) {
+    .flex.activity {
+        flex-direction: column; 
+        padding-left: 10px; 
+        padding-right: 10px; 
+        
+    }
+
+    .activity.left table {
+        margin-left: 0; 
+    }
+}
+
