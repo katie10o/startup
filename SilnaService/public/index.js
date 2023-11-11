@@ -22,10 +22,11 @@ async function login() {
   const data = await response.json();
 
   if (data.message === 'Success logging in!') {
-    sessionStorage.setItem("email", email)
-    window.location.href = "silna_main.html"
+    sessionStorage.setItem("email", loginData.email);
+    window.location.href = "silna_main.html";
   } else {
-    console.error('Login Failed:', data.message)
+    console.error('Login Failed:', data.message);
+    alert('Login Failed: ' + data.message);
   }
   }
 

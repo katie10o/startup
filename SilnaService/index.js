@@ -42,7 +42,7 @@ apiRouter.post('/login', (req, res) => {
 const { email, password } = req.body;
 
 if (users[email] && users[email].password == password){
-  res.send({message: 'Success loging in!', user: {email}});
+  res.send({message: 'Success logging in!', user: {email}});
 } else {
     return res.status(400).send({message: 'Invalid email or password'});
   }
