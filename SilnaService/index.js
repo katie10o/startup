@@ -11,7 +11,7 @@ const port = process.argv.length > 2 ? process.argv[2] : 3000;
 app.use(express.json());
 
 // Serve up the frontend static content hosting
-app.use(express.static('public'));
+app.use(express.static('/Users/katieklabacka/Desktop/school/cs/CS260/startup/SilnaService/public'));
 
 // Router for service endpoints
 const apiRouter = express.Router();
@@ -19,21 +19,21 @@ app.use(`/api`, apiRouter);
 
 apiRouter.post('/createAcnt', (req, res) => {
 // adding a new user, for now will store in global variable
-const { firstName, lastName, email, pasword } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
-if (users[email]){
-  return res.status(400).send({message: 'Email is taken'});
-}
+  if (users[email]){
+    return res.status(400).send({message: 'Email is taken'});
+  }
 
-const newUser = {
-  firstName,
-  lastName,
-  password
-};
+  const newUser = {
+    firstName,
+    lastName,
+    password
+  };
 
-users[email] = newUser;
+  users[email] = newUser;
 
-res.send({message: 'Account created successfully!', user: {email} });
+  res.send({message: 'Account created successfully!', user: {email} });
   
 });
 
