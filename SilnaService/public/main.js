@@ -1,110 +1,132 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const userEmail = sessionStorage.getItem("email");
-    document.getElementById("userEmail").textContent = userEmail;
-
-    const mealTypeSelect = document.getElementById("meal_type");
-    const mealInput = document.getElementById("meal-input");
-    const enterBtn = document.getElementById("enter");
-    const nutrientTypeSelect = document.getElementById("nuts_type");
-    const numParagraph = document.querySelector(".num");
-    const selectedNutrientSpan = document.getElementById("selected_nutr");
-
-
-    mealTypeSelect.addEventListener("change", function() {
-        if (this.value!== "s"){
-            mealInput.style.display = "block";
-            if (this.value === "w"){
-                mealInput.type = "number";
-                mealInput.placeholder = "Enter oz";
-            } else {
-                mealInput.type = "text";
-                mealInput.placeholder = "Enter Meal";
-            }
-        } else {
-            mealInput.style.display = "none";
-        }
-    });
-
-    enterBtn.addEventListener("click", function() {
-        const selectedMeal = mealTypeSelect.value;
-        const enteredMeal = mealInput.value.trim();
-
-        if (enteredMeal) {
-            switch (selectedMeal){
-                case 'b':
-                    updateTable("Breakfast", enteredMeal);
-                    break;
-                
-                case 'l':
-                    updateTable("Lunch", enteredMeal);
-                    break;
-                case 'd':
-                    updateTable("Dinner", enteredMeal);
-                    break;
-                case 'sn':
-                    updateTable("Snacks", enteredMeal);
-                    break;
-                case 'w':
-                    updateTable("Water", enteredMeal);
-                    break;
-            } 
-            mealInput.value=""; 
-        }
-    });
-    nutrientTypeSelect.addEventListener("change", function() {
-        let selectedValue = this.value;
-        let nutrientName = "";
-        
-        switch (selectedValue) {
-            case 'm':
-                nutrientName = "mineral";
-                numParagraph.textContent = "47%";
-                break;
-            case 'v':
-                nutrientName = "vitamin";
-                numParagraph.textContent = "55%";
-                break;
-            case 'p':
-                nutrientName = "protein";
-                numParagraph.textContent = "65%";
-                break;
-            case 'f':
-                nutrientName = "fat";
-                numParagraph.textContent = "35%";
-                break;
-            case 'c':
-                nutrientName = "carb";
-                numParagraph.textContent = "60%";
-                break;
-            default:
-                numParagraph.style.display = "none";
-                selectedNutrientSpan.parentNode.style.display = "none";
-                return;
-        }
-
-        numParagraph.style.display = "block";
-        selectedNutrientSpan.parentNode.style.display = "block";
-        selectedNutrientSpan.textContent = nutrientName;
-    });
+    displayUserEmail();
+    initializeEventListeners();
 });
 
-function updateTable(category, meal){
-    const rows = document.querySelectorAll(".activity table tr");
+function displayUserEmail() {
+    const userEmail = sessionStorage.getItem("email");
+    document.getElementById("userEmail").textContent = userEmail;
+}
 
-    rows.forEach((row) => {
-        const mealCategoryCell = row.querySelector(".meal_category");
-        if (mealCategoryCell && mealCategoryCell.textContent.trim() === category) {
-            const itemsCell = row.querySelector(".items");
-            if(category === "Water"){
-                const currentoz = parseFloat(itemsCell.textContent.trim()) || 0;
-                const addoz = parseFloat(meal) || 0;
-                itemsCell.textContent = (currentoz + addoz).toString() + " oz";
-            }
-            if (!itemsCell.textContent.trim()) {
-                itemsCell.textContent = meal;
-            } else{
-                itemsCell.textContent += ", " + meal;
-            }
+function initializeEventListeners() {
+    const mealTypeSelect = document.getElementById("meal_type");
+    const mealInput = document.getElementById("meal-input");
+    const enterBtn = document.getElementById("enter-meal");
+    const enterSuggestionsBtn = document.getElementById("enter-suggestions");
+    const nutrientTypeSelect = document.getElementById("nuts_type");
+
+    mealTypeSelect.addEventListener("change", () => handleMealTypeChange(mealTypeSelect, mealInput));
+    enterBtn.addEventListener("click", () => handleEnterButtonClick(mealTypeSelect, mealInput));
+    enterSuggestionsBtn.addEventListener("click", () => handleEnterSuggestionsClick(nutrientTypeSelect));
+
+}
+
+function handleMealTypeChange(mealTypeSelect, mealInput) {
+    if (mealTypeSelect.value !== "s") {
+        mealInput.style.display = "block";
+    } else {
+        mealInput.style.display = "none";
+    }
+}
+
+async function handleEnterButtonClick(mealTypeSelect, mealInput) {
+    const enterBtn = document.getElementById("enter-meal");
+    enterBtn.disabled = true;
+
+    const enteredMeal = mealInput.value.trim();
+    if (!enteredMeal) {
+        enterBtn.disabled = false;
+        return;
+    }
+
+    const items = enteredMeal.split(',').map(item => item.trim());
+    await submitMealData(mealTypeSelect.value, items);
+    enterBtn.disabled = false;
+    mealInput.value = "";
+}
+
+async function submitMealData(mealType, items) {
+    document.getElementById('nutritionalValue').textContent = 'Loading...';
+    try {
+        const response = await fetch('/api/enterFood', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mealType, items })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.message);
+
+            const nutrients = data.nutrients;
+            let nutrientText = '';
+            nutrients.forEach(nutrient => {
+                nutrientText += `${nutrient.item}:\n`;
+                const nutrientDetails = JSON.parse(nutrient.nutrients);
+                nutrientText += formatNutrientDetails(nutrientDetails);
+                nutrientText += '\n';
+            });
+
+            document.getElementById('nutritionalValue').textContent = nutrientText;
         }
-    });
+    } catch (error) {
+        console.error("Error entering food: ", error);
+        document.getElementById('nutritionalValue').textContent = 'Error loading the nutritional value, try again.'
+    }
+}
+async function handleEnterSuggestionsClick(nutrientTypeSelect) {
+    console.log("Enter Suggestions Clicked");
+    const nutrient = nutrientTypeSelect.value;
+    if (!nutrient) {
+        alert("Please select a nutrient.");
+        return;
+    }
+
+    document.getElementById('recommendedFoods').textContent = 'Loading...';
+    try {
+        const response = await fetch('/api/enteredNutrients', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nutrient })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            let foodData = data.foodData.foods;
+            console.log(foodData);
+            console.log(typeof foodData);
+
+            document.getElementById('recommendedFoods').textContent = formatFoodSuggestions(foodData);
+        } else {
+            document.getElementById('recommendedFoods').textContent = 'Failed to load food suggestions.';
+        }
+    } catch (error) {
+        console.error("Error getting food suggestions: ", error);
+        document.getElementById('recommendedFoods').textContent = 'Error loading food suggestions, try again.'
+    }
+}
+
+function formatFoodSuggestions(foodData) {
+    if (!foodData) {
+        return 'No suggestions available.';
+    }
+
+
+    // Join the food items into a string
+    return foodData.join(', ');
+}
+
+function formatNutrientDetails(details) {
+    let formattedText = '';
+    for (const key in details) {
+        if (typeof details[key] === 'object' && details[key] !== null) {
+            formattedText += `${key}:\n`;
+            for (const nestedKey in details[key]) {
+                formattedText += `  ${nestedKey}: ${details[key][nestedKey]}\n`;
+            }
+        } else {
+            formattedText += `${key}: ${details[key]}\n`;
+        }
+    }
+    return formattedText;
 }

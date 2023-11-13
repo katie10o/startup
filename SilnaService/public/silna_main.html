@@ -24,71 +24,74 @@
             <div class="flex nav">
                 <h4 class="user">Welcome <span id="userEmail"></span></h4>
                 <div class="nav_links">
-                    <a href="silna_overview.html">Nutrient Details</a>
                     <a href="silna_settings.html">Settings</a>
                 </div>
             </span<>
     
             <div class=" flex activity">
-                <div class="activity left">
+                <div class="activity top">
                     <h3>Meal Input</h3>
                     <select id="meal_type" name="meal">
                         <option value="s" selected>Select meal...</option>
-                        <option value="b">Breakfast</option>
-                        <option value="l">Lunch</option>
-                        <option value="d">Dinner</option>
-                        <option value="sn">Snacks</option>
-                        <option value="w">Water Input</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Snacks">Snacks</option>
                     </select>
                     <input type="text" id="meal-input" placeholder="Enter Meal" style="display: none;">
-                    <button class="enter" id="enter">Enter</button> 
+                    <button class="enter" id="enter-meal">Enter</button> 
+                    <p>Nutritional Value of entered foods:</p>
+                    <p id="nutritionalValue"></p>
 
-                    <table>
-                        <tr>
-                            <th class="meal_category">Meal</th>
-                            <th class="items">Items </th>
-                        </tr>
-                        <tr>
-                            <td class="meal_category">Breakfast</td>
-                            <td class="items"></td>
-                        </tr>
-                        <tr>
-                            <td class="meal_category">Lunch</td>
-                            <td class="items"></td>
-                        </tr>
-                        <tr>
-                            <td class="meal_category">Dinner</td>
-                            <td class="items"></td>
-                        </tr>
-                        <tr>
-                            <td class="meal_category">Snacks</td>
-                            <td class="items"></td>
-                        </tr>
-                        <tr>
-                            <td class="meal_category">Water</td>
-                            <td class="items"></td>
-                        </tr>
-                   </table>
                 </div>
-                <div class="activity right">
-                    <h3>Nutrients</h3>
+                <div class="activity bottom">
+                    <h3>Food Ideas</h3>
                     <select id="nuts_type" name="nutrients">
                         <option value="s" selected>Select Nutrient...</option>
-                        <option value="m">Minerals</option>
-                        <option value="v">Vitamins</option>
-                        <option value="p">Protien</option>
-                        <option value="f">Fats</option>
-                        <option value="c">Carbs</option>
+                        <option value="Carbohydrate">Carbohydrate</option>
+                        <option value="Fats">Fats</option>
+                        <option value="Fiber">Fiber</option>
+                        <option value="Protien">Protien</option>
+                        <option value="Mineral: Calcium">Mineral: Calcium</option>
+                        <option value="Mineral: Chloride">Mineral: Chloride</option>
+                        <option value="Mineral: Chromium">Mineral: Chromium</option>
+                        <option value="Mineral: Copper">Mineral: Copper</option>
+                        <option value="Mineral: Fluoride">Mineral: Fluoride</option>
+                        <option value="Mineral: Iodine">Mineral: Iodine</option>
+                        <option value="Mineral: Iron">Mineral: Iron</option>
+                        <option value="Mineral: Magnesium">Mineral: Magnesium</option>
+                        <option value="Mineral: Manganese">Mineral: Manganese</option>
+                        <option value="Mineral: Molybdenum">Mineral: Molybdenum</option>
+                        <option value="Mineral: Phosphorus">Mineral: Phosphorus</option>
+                        <option value="Mineral: Potassium">Mineral: Potassium</option>
+                        <option value="Mineral: Selenium">Mineral: Selenium</option>
+                        <option value="Mineral: Sodium">Mineral: Sodium</option>
+                        <option value="Mineral: Zinc">Mineral: Zinc</option>
+                        <option value="Vitamin: A">Vitamin: A</option>
+                        <option value="Vitamin: B6">Vitamin: B6</option>
+                        <option value="Vitamin: B12">Vitamin: B12</option>
+                        <option value="Vitamin: C">Vitamin: C</option>
+                        <option value="Vitamin: D">Vitamin: D</option>
+                        <option value="Vitamin: E">Vitamin: E</option>
+                        <option value="Vitamin: K">Vitamin: K</option>
+                        <option value="Vitamin: Riboflavin">Vitamin: Riboflavin</option>
+                        <option value="Vitamin: Folate">Vitamin: Folate</option>
+                        <option value="Vitamin: Niacin">Vitamin: Niacin</option>
+                        <option value="Vitamin: Choline">Vitamin: Choline</option>
+                        <option value="Vitamin: Pantothenic Acid">Vitamin: Pantothenic Acid</option>
+                        <option value="Vitamin: Biotin">Vitamin: Biotin</option>
+                        <option value="Vitamin: Carotenoids">Vitamin: Carotenoids</option>
                     </select>
-                    <p>This is where the weekly percent of nutrient goal would pop up based on the users selection.</p>
-                    <p class="num">47%</p>
-                    <p class="explain">of the weekly <span id ="selected_nutr"></span> intake completed! Way to go!</p>
-    
+                    <button class="enter" id="enter-suggestions">Enter</button> 
+                    <p>Recommendations:</p>
+                    <p id="recommendedFoods"></p>
+                </div>
+
+                <div id="activity disclaimer">
+                    <p>To see USDA recommended daily nutrients <a href="https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator">click here</a></p>
+                    <p>The information provided on Silna is for general informational purposes only and is not intended as, nor should it be considered a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. The content on this website is not intended to establish a standard of care to be followed by a user of the website. You understand and agree that neither Silna nor its suppliers or vendors are responsible for any claim, loss, or damage directly or indirectly resulting from your use of this website or the information resources contained on or accessible through this website.</p>
                 </div>
                 
-            </div>
-            <div class="flex image">
-                <img src="spoons.jpg"> 
             </div>
             <br>
             <footer class="logout">
