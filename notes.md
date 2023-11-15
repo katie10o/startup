@@ -27,3 +27,7 @@ first be in the right directory and then type this code:
 then log into the server
 and then from the simon folder move to /usr/share/caddy 
 
+mv * path/to/where/i/want
+
+
+backend is pretty confusing, but basically there is the index.js file and then the public folder that contains the html, css, and js code for front end. You need to add functions to to both the backend and frontend js files if you want them to communicate. Also, postman is really really helpful in seeing how the data is being sent/recieved. 

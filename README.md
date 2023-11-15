@@ -51,3 +51,13 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 -I have built a sign up, login, and settings page and implemented JavaScript code in preparation for database login 
 -I have logistical methods in JavaScript for when users interact with my website
 -Though it was not specificed on my website, I know the location of where the websocket will be interacting with my JS code and website (with meal inputs)
+
+### Web App Service
+- I became overwhelmed with the amount of work my website needed and decided to cut back on it. Instead of logging the nutrients and meals of the user, I decided to have the user just enter in the meal, recieve the nutrients details or to select a nutrient and recieve foods with that nutrient. 
+- I've created a node.js/express HTTP service
+- Static middleware for fronted, my html,css, and frontend JS files are being called upon when requests are handled
+- I am able to call to third party extentions - I implemented openAI's API to recieve food ideas or food nutrients
+- I have backend service endpoints for login and sign up information that stores the data in a global variable - will replace with database 
+- There are a few fetch functions calling the backend from the frontend. 
+
+
