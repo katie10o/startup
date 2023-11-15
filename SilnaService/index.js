@@ -1,6 +1,7 @@
 const express = require('express');
 const { OpenAI } = require("openai");
 require ("dotenv").config();
+const DB = require('./database.js');
 
 const app = express();
 let users = {};
