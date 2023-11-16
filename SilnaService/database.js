@@ -26,8 +26,6 @@ async function addUser(person){
   return result
 }
 
-
-
 async function addMeal(meal) {
   const result = await mealCollection.insertOne(meal);
   return result;

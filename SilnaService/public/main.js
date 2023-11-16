@@ -58,16 +58,12 @@ async function submitMealData(mealType, items) {
             const data = await response.json();
             console.log(data.message);
 
-            const nutrients = data.nutrients;
+            const nutrientsDetails = data.nutrients;
+            console.log(nutrientsDetails)
             let nutrientText = '';
-            nutrients.forEach(nutrient => {
-                nutrientText += `${nutrient.item}:\n`;
-                const nutrientDetails = JSON.parse(nutrient.nutrients);
-                nutrientText += formatNutrientDetails(nutrientDetails);
-                nutrientText += '\n';
-            });
+            nutrientText = formatNutrientDetails(nutrientsDetails)
 
-            document.getElementById('nutritionalValue').textContent = nutrientText;
+            document.getElementById('nutritionalValue').innerHTML = nutrientText;
         }
     } catch (error) {
         console.error("Error entering food: ", error);
@@ -110,23 +106,22 @@ function formatFoodSuggestions(foodData) {
     if (!foodData) {
         return 'No suggestions available.';
     }
-
-
     // Join the food items into a string
     return foodData.join(', ');
 }
 
 function formatNutrientDetails(details) {
     let formattedText = '';
-    for (const key in details) {
-        if (typeof details[key] === 'object' && details[key] !== null) {
-            formattedText += `${key}:\n`;
-            for (const nestedKey in details[key]) {
-                formattedText += `  ${nestedKey}: ${details[key][nestedKey]}\n`;
+
+    for (const item of details){
+        formattedText += (item.item + ":<br>")
+        const nutrientdetails = JSON.parse(item.nutrients);
+        for (let nutrient in nutrientdetails){
+            if (nutrientdetails[nutrient] !== "object Object") {
+                formattedText += (nutrient + ": " + nutrientdetails[nutrient] + "<br>");
             }
-        } else {
-            formattedText += `${key}: ${details[key]}\n`;
         }
     }
+    formattedText += "<br>"
     return formattedText;
 }

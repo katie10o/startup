@@ -8,7 +8,7 @@ const app = express();
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -72,6 +72,7 @@ apiRouter.post('/enterFood', async (req, res) => {
       return res.status(400).send({ message: 'Invalid food entry' });
   }
 
+
   try {
       const nutrientResults = await Promise.all(items.map(async (item) => {
           const completion = await openai.chat.completions.create({
@@ -79,7 +80,7 @@ apiRouter.post('/enterFood', async (req, res) => {
               response_format: {"type": "json_object"},
               messages: [
                   { role: "user", content: item },
-                  { role: "system", content: "give me the nutrients of this item in the form of a JSON object. provide each type of fat with its metric value, each type of protein and its metric value, each type of vitamin and its metric value, each type of mineral and its metric value, and each type of carb and its metric value if possible. no white space either. {'nutrientType' : 'metric value'}" }
+                  { role: "system", content: "give me the nutrients of this item in the form of a JSON object that contains no \\n space. provide each type of fat with its metric value, each type of protein and its metric value, each type of vitamin and its metric value, each type of mineral and its metric value, and each type of carb and its metric value if possible. {'nutrientType; : 'metric value', 'nutrientType' : 'metric value'}" }
               ],
           });
 
