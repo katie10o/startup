@@ -4,7 +4,6 @@ require ("dotenv").config();
 const DB = require('./database.js');
 
 const app = express();
-let users = {};
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
@@ -22,35 +21,45 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.post('/createAcnt', (req, res) => {
-// adding a new user, for now will store in global variable
-  const { firstName, lastName, email, password } = req.body;
 
-  if (users[email]){
-    return res.status(400).send({message: 'Email is taken'});
+
+apiRouter.post('/createAcnt', async (req, res) => {
+
+  const { firstName, lastName, email, password } = req.body;
+  
+  const exists = await DB.accountVerify(email);
+  if (exists) {
+    return res.status(400).send({message: "email is taken"});
   }
 
   const newUser = {
-    firstName,
-    lastName,
-    password
+    firstName : firstName,
+    lastName : lastName,
+    email : email,
+    password : password
   };
 
-  users[email] = newUser;
+  DB.addUser(newUser)
 
   res.send({message: 'Account created successfully!', user: {email} });
   
 });
 
-apiRouter.post('/login', (req, res) => {
+apiRouter.post('/login', async (req, res) => {
 //authenticating the user
 const { email, password } = req.body;
-
-if (users[email] && users[email].password == password){
-  res.send({message: 'Success logging in!', user: {email}});
-} else {
-    return res.status(400).send({message: 'Invalid email or password'});
+const matchedEmail = await DB.accountVerify(email)
+try {
+  if (!matchedEmail) {
+    return res.status(404).send({message: 'Invalid email'});
   }
+  if (matchedEmail.password !== password){
+    return res.status(404).send({message: 'Invalid password'});
+  }
+  res.send({message: 'Success logging in!', user: {email}});
+} catch (error){
+  res.status(500).send({message: "an arror occurred"})
+}
 
 });
 

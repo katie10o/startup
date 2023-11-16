@@ -4,6 +4,7 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('Cluster0');
+const userData = db.collection('user')
 const mealCollection = db.collection('meal');
 
 // This will asynchronously test the connection and exit the process if it fails
@@ -14,6 +15,18 @@ const mealCollection = db.collection('meal');
   console.log(`Unable to connect to database with ${url} because ${ex.message}`);
   process.exit(1);
 });
+
+function accountVerify(email){
+  return userData.findOne({email : email});
+}
+
+
+async function addUser(person){
+  const result = await userData.insertOne(person)
+  return result
+}
+
+
 
 async function addMeal(meal) {
   const result = await mealCollection.insertOne(meal);
@@ -30,4 +43,4 @@ function getHighScores() {
   return cursor.toArray();
 }
 
-module.exports = { addScore, getHighScores };
+module.exports = { accountVerify, addUser, addMeal };
