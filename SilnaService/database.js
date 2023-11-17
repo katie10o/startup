@@ -26,19 +26,58 @@ async function addUser(person){
   return result
 }
 
-async function addMeal(meal) {
-  const result = await mealCollection.insertOne(meal);
-  return result;
-}
+async function mealChecker(meal, userEmail) {
 
-function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
+  const existingMeal = await mealCollection.findOne({
+    email: userEmail,
+    Date: isoDate,
+    Meal: meal.Meal
+  });
+
+  if (existingMeal){
+    return false;
+  } else{
+    const result = await addMeal(meal, userEmail);
+    return result;
+  }
+}
+async function addMeal(meal, userEmail){
+  var currentDate = new Date();
+  var isoDate = currentDate.toISOString().split('T')[0];
+
+  const update = {
+    $push: {"Entry": meal.Entry},
+    $set: {"Date": isoDate, "Meal": meal.Meal}
   };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
+
+  const result = await mealCollection.updateOne(
+    { email: userEmail, Date: isoDate, Meal: meal.Meal },
+    update,
+    { upsert: true }
+  );
 }
 
-module.exports = { accountVerify, addUser, addMeal };
+
+async function deleteMeal(userEmail, mealType){
+  var currentDate = new Date();
+  var isoDate = currentDate.toISOString().split('T')[0];
+
+    const result = await mealCollection.deleteOne({ 
+      email: userEmail,
+      Date: isoDate,
+      Meal: mealType, 
+    });
+    return result;
+
+}
+
+async function getMeal(mealType, userEmail) {
+  var currentDate = new Date();
+  var isoDate = currentDate.toISOString().split('T')[0];
+
+  const query = { email: userEmail, Date: isoDate, Meal: mealType };
+  const mealData = await mealCollection.findOne(query);
+  return mealData;
+}
+
+module.exports = { deleteMeal, mealChecker, accountVerify, addUser, addMeal, getMeal };

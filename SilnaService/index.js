@@ -66,12 +66,25 @@ try {
 apiRouter.post('/enterFood', async (req, res) => {
   //food input from the user 
   //store it in the table and send it to nutrient api
-  const { mealType, items } = req.body;
+  const { mealType, items, userEmail } = req.body;
+
+  const mealExistance = null;
 
   if (!mealType || !items || !Array.isArray(items)) {
       return res.status(400).send({ message: 'Invalid food entry' });
   }
+  
+  const mealToAdd = {
+    Meal : mealType,
+    Entry : items
+  }
 
+
+  try {
+    mealExistance = await DB.mealChecker(mealToAdd, userEmail);
+  } catch (error) {
+    res.status(500).send({ message: 'Error adding meal to db' });
+  }
 
   try {
       const nutrientResults = await Promise.all(items.map(async (item) => {
@@ -92,12 +105,40 @@ apiRouter.post('/enterFood', async (req, res) => {
           };
       }));
 
-      return res.send({ message: 'Food successfully recieved!', mealType, items, nutrients: nutrientResults });
+      return res.send({ message: 'Food successfully recieved!', mealExistance, mealType, items, nutrients: nutrientResults });
   } catch (error) {
       console.error("Error processing food entry: ", error);
       return res.status(500).send({ message: 'Error processing food entry' });
   }
 });
+
+apiRouter.post('/mealTypeLog', async (req, res) =>{
+  const {mealType, userEmail} = req.body;
+  try {
+    const mealTypeLogs = await DB.getMeal(mealType, userEmail);
+  res.send(mealTypeLogs);
+  }catch (error){
+    res.status(500).send({ message: 'Error retrieving meal data' });
+  }
+
+});
+apiRouter.post('/deleteMeal', async (req, res) =>{
+  const { userEmail, mealType } = req.body;
+
+  try{
+    const result = await DB.deleteMeal(userEmail, mealType);
+    if (result.deletedCount === 0) {
+      return res.status(404).send({ message: 'Meal not found' });
+  }
+  res.send({ message: 'Meal deleted successfully' });
+
+  }catch (error){
+    res.status(500).send({ message: 'Error deleting data' });
+
+  }
+
+});
+
 
 apiRouter.post('/enteredNutrients', async (req, res) => {
   const { nutrient } = req.body;

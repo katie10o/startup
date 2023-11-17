@@ -12,11 +12,15 @@ function initializeEventListeners() {
     const mealTypeSelect = document.getElementById("meal_type");
     const mealInput = document.getElementById("meal-input");
     const enterBtn = document.getElementById("enter-meal");
+    const mealTypeRecord = document.getElementById("meal_records")
+    const enterMealRecord = document.getElementById("enter-daily-meal")
     const enterSuggestionsBtn = document.getElementById("enter-suggestions");
     const nutrientTypeSelect = document.getElementById("nuts_type");
 
+
     mealTypeSelect.addEventListener("change", () => handleMealTypeChange(mealTypeSelect, mealInput));
     enterBtn.addEventListener("click", () => handleEnterButtonClick(mealTypeSelect, mealInput));
+    enterMealRecord.addEventListener("click", () => handleEnterDailyMealClick(mealTypeRecord))
     enterSuggestionsBtn.addEventListener("click", () => handleEnterSuggestionsClick(nutrientTypeSelect));
 
 }
@@ -47,29 +51,90 @@ async function handleEnterButtonClick(mealTypeSelect, mealInput) {
 
 async function submitMealData(mealType, items) {
     document.getElementById('nutritionalValue').textContent = 'Loading...';
+    const userEmail = sessionStorage.getItem('email');
     try {
+
         const response = await fetch('/api/enterFood', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mealType, items })
+            body: JSON.stringify({ mealType, items, userEmail})
         });
 
         if (response.ok) {
             const data = await response.json();
             console.log(data.message);
-
+            const enteredMeal = data.mealExistance;
+            console.log(enteredMeal);
             const nutrientsDetails = data.nutrients;
-            console.log(nutrientsDetails)
+            console.log(nutrientsDetails);
             let nutrientText = '';
-            nutrientText = formatNutrientDetails(nutrientsDetails)
-
+            nutrientText = formatNutrientDetails(nutrientsDetails);
+            if (!enteredMeal){
+                document.getElementById('mealAlreadyEntered').textContent = "Meal Entry already added for " + mealType + ", will not be added to Database unless edited below.";
+            }
             document.getElementById('nutritionalValue').innerHTML = nutrientText;
         }
     } catch (error) {
         console.error("Error entering food: ", error);
-        document.getElementById('nutritionalValue').textContent = 'Error loading the nutritional value, try again.'
+        document.getElementById('nutritionalValue').textContent = 'Error loading the nutritional value, try again.';
     }
 }
+async function handleEnterDailyMealClick(mealTypeRecord) {
+    document.getElementById('selected_meal').textContent = 'Loading...';
+    console.log("meal record button clicked");
+    const deleteBtn = document.getElementById('deleteBtn');
+    const userEmail = sessionStorage.getItem('email');
+    const mealType = mealTypeRecord.value;
+
+
+    deleteBtn.style.display = "block";
+    deleteBtn.addEventListener("click", () => handleEnterDeleteClick(mealType));
+
+
+    try{
+        const response = await fetch('/api/mealTypeLog', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({mealType, userEmail})
+        });
+
+        if (response.ok){
+            const data = await response.json();
+            console.log(data);
+            let entry = data.Entry;
+            document.getElementById('selected_meal').textContent = mealType;
+            document.getElementById('entries').innerHTML = formatMealEntry(entry);
+        }
+
+    } catch (error){
+        console.error("Error getting meals: ", error);
+
+    }
+
+}
+
+async function handleEnterDeleteClick(mealType) {
+    const userEmail = sessionStorage.getItem('email')
+
+    try{
+
+        const response = await fetch('/api/deleteMealInput', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({userEmail, mealType})
+        });
+
+        if (response.ok){
+            document.getElementById('deleted').textContent = "Successfully deleted";
+        }
+
+    }catch (error) {
+        console.error("Error deleting meal: ", error)
+    }
+
+};
+
+
 async function handleEnterSuggestionsClick(nutrientTypeSelect) {
     console.log("Enter Suggestions Clicked");
     const nutrient = nutrientTypeSelect.value;
@@ -101,6 +166,14 @@ async function handleEnterSuggestionsClick(nutrientTypeSelect) {
         document.getElementById('recommendedFoods').textContent = 'Error loading food suggestions, try again.'
     }
 }
+function formatMealEntry(entry){
+    let formattedText = "";
+    for (const item of entry){
+        formattedText += item + "<br>";
+    }
+    return formattedText;
+
+}
 
 function formatFoodSuggestions(foodData) {
     if (!foodData) {
@@ -114,7 +187,7 @@ function formatNutrientDetails(details) {
     let formattedText = '';
 
     for (const item of details){
-        formattedText += (item.item + ":<br>")
+        formattedText += ("<b>"+item.item + ":</b><br>")
         const nutrientdetails = JSON.parse(item.nutrients);
         for (let nutrient in nutrientdetails){
             if (nutrientdetails[nutrient] !== "object Object") {
@@ -122,6 +195,5 @@ function formatNutrientDetails(details) {
             }
         }
     }
-    formattedText += "<br>"
     return formattedText;
 }

@@ -67,6 +67,28 @@ html, body {
     text-decoration: none;
     color: #000;
 }
+.activity.middle {
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+}
+.activity.middle h3{
+    padding-top: 10px;
+}
+.activity.middle select {
+    font-size: 20px;
+    width: 600px;
+}
+.activity.middle button {
+    background-color: #c49c56;
+    font-size: 20px;
+    width: 150px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
+}
+
 
 .activity.bottom {
     flex-direction: column;
@@ -108,7 +130,7 @@ footer.logout{
     margin: 10px 0; 
 }
 .activity.disclaimer {
-    padding-top: 200px;
+    padding-top: 100px;
 }
 
 

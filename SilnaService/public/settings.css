@@ -45,6 +45,9 @@ html, body {
     margin-bottom: 10px;
     background-color: #c49c56;
 }
+#deleteBtn{
+    display: none;
+}
 button a{
     color: #000;
     text-decoration: none;

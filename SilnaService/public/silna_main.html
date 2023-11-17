@@ -41,9 +41,26 @@
                     <input type="text" id="meal-input" placeholder="Enter Meal" style="display: none;">
                     <button class="enter" id="enter-meal">Enter</button> 
                     <p>Nutritional Value of entered foods:</p>
+                    <p id="mealAlreadyEntered"></p>
                     <p id="nutritionalValue"></p>
 
                 </div>
+                <div class ="activity middle">
+                    <h3>Daily Meal Records</h3>
+                    <select id="meal_records">
+                        <option value="s" selected>Select meal...</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Snacks">Snacks</option>
+                    </select>
+                    <button class="enter" id="enter-daily-meal">Enter</button> 
+                    <p> Entered meals for: <span id="selected_meal"></span></p>
+                    <p id="entries"></p>
+                    <button id="deleteBtn">Delete Meal Input</button>
+                    <p id="deleted"></p>
+
+                </span<>
                 <div class="activity bottom">
                     <h3>Food Ideas</h3>
                     <select id="nuts_type" name="nutrients">
@@ -87,7 +104,7 @@
                     <p id="recommendedFoods"></p>
                 </div>
 
-                <div id="activity disclaimer">
+                <div class="activity disclaimer">
                     <p>To see USDA recommended daily nutrients <a href="https://www.nal.usda.gov/human-nutrition-and-food-safety/dri-calculator">click here</a></p>
                     <p>The information provided on Silna is for general informational purposes only and is not intended as, nor should it be considered a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. The content on this website is not intended to establish a standard of care to be followed by a user of the website. You understand and agree that neither Silna nor its suppliers or vendors are responsible for any claim, loss, or damage directly or indirectly resulting from your use of this website or the information resources contained on or accessible through this website.</p>
                 </div>
