@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Serve up the frontend static content hosting
 // need to take this string out and just do public
-app.use(express.static('/Users/katieklabacka/Desktop/school/cs/CS260/startup/SilnaService/public'));
+app.use(express.static('public'));
 
 // Router for service endpoints
 const apiRouter = express.Router();

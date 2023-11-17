@@ -31,3 +31,5 @@ mv * path/to/where/i/want
 
 
 backend is pretty confusing, but basically there is the index.js file and then the public folder that contains the html, css, and js code for front end. You need to add functions to to both the backend and frontend js files if you want them to communicate. Also, postman is really really helpful in seeing how the data is being sent/recieved. 
+
+database was really cool to learn and made the backend make more sense. Basically, you create the majority of your functions but there is some documentation with mongoDB
