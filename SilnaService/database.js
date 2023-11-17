@@ -31,9 +31,9 @@ async function mealChecker(meal, userEmail) {
   var isoDate = currentDate.toISOString().split('T')[0];
 
   const existingMeal = await mealCollection.findOne({
-    email: userEmail,
     Date: isoDate,
-    Meal: meal.Meal
+    email: userEmail,
+    Meal: meal.Meal, 
   });
 
   if (existingMeal){
@@ -46,16 +46,15 @@ async function addMeal(meal, userEmail){
   var currentDate = new Date();
   var isoDate = currentDate.toISOString().split('T')[0];
 
-  const update = {
-    $push: {"Entry": meal.Entry},
-    $set: {"Date": isoDate, "Meal": meal.Meal}
-  };
+  const addMealEntry = {
+    Date: isoDate,
+    Meal: meal.Meal,
+    email: userEmail,
+    Entry: meal.Entry
+  }
 
-  const result = await mealCollection.updateOne(
-    { email: userEmail, Date: isoDate, Meal: meal.Meal },
-    update,
-    { upsert: true }
-  );
+  const result = await mealCollection.insertOne(addMealEntry)
+
   return result;
 }
 
@@ -65,9 +64,9 @@ async function deleteMeal(userEmail, mealType){
   var isoDate = currentDate.toISOString().split('T')[0];
 
     const result = await mealCollection.deleteOne({ 
-      email: userEmail,
       Date: isoDate,
       Meal: mealType, 
+      email: userEmail,
     });
     return result;
 

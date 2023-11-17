@@ -127,7 +127,10 @@ async function handleEnterDeleteClick(mealType) {
         });
 
         if (response.ok){
-            document.getElementById('deleted').textContent = "Successfully deleted";
+            const data = await response.json();
+            let message = data.message;
+            console.log(message);
+            document.getElementById('deleted').textContent = message;
         }
 
     }catch (error) {

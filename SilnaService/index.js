@@ -79,8 +79,8 @@ apiRouter.post('/enterFood', async (req, res) => {
   }
   
   const mealToAdd = {
-    Meal : mealType,
-    Entry : items
+    Meal: mealType,
+    Entry: items
   }
 
   mealExistance = await DB.mealChecker(mealToAdd, userEmail);
@@ -130,15 +130,17 @@ apiRouter.post('/mealTypeLog', async (req, res) =>{
   }
 
 });
-apiRouter.post('/deleteMeal', async (req, res) =>{
+
+apiRouter.post('/deleteMealInput', async (req, res) =>{
   const { userEmail, mealType } = req.body;
 
   try{
     const result = await DB.deleteMeal(userEmail, mealType);
     if (result.deletedCount === 0) {
-      return res.status(404).send({ message: 'Meal not found' });
-  }
-  res.send({ message: 'Meal deleted successfully' });
+      res.json({ message: 'Meal not found' });
+    }else{
+      res.json({ message: 'Meal deleted successfully' });
+    }
 
   }catch (error){
     res.status(500).send({ message: 'Error deleting data' });
