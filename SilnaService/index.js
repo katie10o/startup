@@ -6,6 +6,7 @@ const DB = require('./database.js');
 const app = express();
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
+console.log(openai)
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -14,8 +15,8 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.json());
 
 // Serve up the frontend static content hosting
-// need to take this string out and just do /public
-app.use(express.static('public'));
+// need to take this string out and just do public
+app.use(express.static('/Users/katieklabacka/Desktop/school/cs/CS260/startup/SilnaService/public'));
 
 // Router for service endpoints
 const apiRouter = express.Router();
@@ -82,11 +83,12 @@ apiRouter.post('/enterFood', async (req, res) => {
     Entry : items
   }
 
+  mealExistance = await DB.mealChecker(mealToAdd, userEmail);
+ 
 
-  try {
-    mealExistance = await DB.mealChecker(mealToAdd, userEmail);
-  } catch (error) {
-    res.status(500).send({ message: 'Error adding meal to db' });
+  let responseMessage = "Meal successfully added to database";
+  if (!mealExistance) {
+    responseMessage = "Previous meal already added, but here's the nutritional value for the entered meal. To delete previous meal, see food log below."
   }
 
   try {
@@ -99,6 +101,9 @@ apiRouter.post('/enterFood', async (req, res) => {
                   { role: "system", content: "give me the nutrients of this item in the form of a JSON object that contains no \\n space. provide each type of fat with its metric value, each type of protein and its metric value, each type of vitamin and its metric value, each type of mineral and its metric value, and each type of carb and its metric value if possible. {'nutrientType; : 'metric value', 'nutrientType' : 'metric value'}" }
               ],
           });
+          if (mealExistance){
+            response = DB.addMeal(mealToAdd, userEmail)
+          }
 
           const nutrientData = completion.choices[0].message.content;
 
@@ -108,7 +113,7 @@ apiRouter.post('/enterFood', async (req, res) => {
           };
       }));
 
-      return res.send({ message: 'Food successfully recieved!', mealExistance, mealType, items, nutrients: nutrientResults });
+      return res.send({responseMessage, mealType, items, nutrients: nutrientResults });
   } catch (error) {
       console.error("Error processing food entry: ", error);
       return res.status(500).send({ message: 'Error processing food entry' });

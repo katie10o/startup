@@ -66,15 +66,14 @@ async function submitMealData(mealType, items) {
             const data = await response.json();
             console.log(data.message);
 
-            const enteredMeal = data.mealExistance;
-            console.log(enteredMeal);
+            const message = data.responseMessage;
+            console.log(message);
 
             const nutrientsDetails = data.nutrients;
             let nutrientText = '';
             nutrientText = formatNutrientDetails(nutrientsDetails);
-            if (!enteredMeal){
-                document.getElementById('mealAlreadyEntered').textContent = "Meal Entry already added for " + mealType + ", will not be added to Database unless edited below.";
-            }
+
+            document.getElementById('mealAlreadyEntered').textContent = message;
             document.getElementById('nutritionalValue').innerHTML = nutrientText;
         }
     } catch (error) {

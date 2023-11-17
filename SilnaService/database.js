@@ -27,6 +27,8 @@ async function addUser(person){
 }
 
 async function mealChecker(meal, userEmail) {
+  var currentDate = new Date();
+  var isoDate = currentDate.toISOString().split('T')[0];
 
   const existingMeal = await mealCollection.findOne({
     email: userEmail,
@@ -37,8 +39,7 @@ async function mealChecker(meal, userEmail) {
   if (existingMeal){
     return false;
   } else{
-    const result = await addMeal(meal, userEmail);
-    return result;
+    return true;
   }
 }
 async function addMeal(meal, userEmail){
@@ -55,6 +56,7 @@ async function addMeal(meal, userEmail){
     update,
     { upsert: true }
   );
+  return result;
 }
 
 
