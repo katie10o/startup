@@ -60,4 +60,10 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 - I have backend service endpoints for login and sign up information that stores the data in a global variable - will replace with database 
 - There are a few fetch functions calling the backend from the frontend. 
 
+### Startup DB
+- MongoDB created and utilized
+- I have endpoints that store create account data (first and last name, user email, and password (will implement hash password next)), and meals that they enter. Only one meal can be entered per category per day, so the user can delete a previous meal and add a new one (it will delete the meal entry on the database as well).
+- user information and meal inputs are stored and accessed through the mongoDB
+
+
 
