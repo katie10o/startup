@@ -76,9 +76,13 @@ async function getMeal(mealType, userEmail) {
   var currentDate = new Date();
   var isoDate = currentDate.toISOString().split('T')[0];
 
+
   const query = { email: userEmail, Date: isoDate, Meal: mealType };
   const mealData = await mealCollection.findOne(query);
-  return mealData;
+  if(mealData){
+    return mealData;
+  }
+  return false;
 }
 
 module.exports = { deleteMeal, mealChecker, accountVerify, addUser, addMeal, getMeal };

@@ -103,9 +103,13 @@ async function handleEnterDailyMealClick(mealTypeRecord) {
         if (response.ok){
             const data = await response.json();
             console.log(data);
-            let entry = data.Entry;
-            document.getElementById('selected_meal').textContent = mealType;
-            document.getElementById('entries').innerHTML = formatMealEntry(entry);
+            if (data.message == "No meals found"){
+                document.getElementById('entries').innerHTML = "No meals found";
+            } else{
+                let entry = data.mealTypeLogs.Entry;
+                document.getElementById('selected_meal').textContent = mealType;
+                document.getElementById('entries').innerHTML = formatMealEntry(entry);
+            }
         }
 
     } catch (error){

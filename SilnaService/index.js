@@ -124,7 +124,11 @@ apiRouter.post('/mealTypeLog', async (req, res) =>{
   const {mealType, userEmail} = req.body;
   try {
     const mealTypeLogs = await DB.getMeal(mealType, userEmail);
-    res.send(mealTypeLogs);
+    if(!mealTypeLogs){
+      res.send({message: "No meals found"});
+    } else{
+      res.send({message: "Meals found", mealTypeLogs});
+    }
   }catch (error){
     res.status(500).send({ message: 'Error retrieving meal data' });
   }
