@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     displayUserEmail();
     initializeEventListeners();
+    document.getElementById('deleteBtn').style.display = 'none';
 });
 
 function displayUserEmail() {
@@ -52,6 +53,7 @@ async function handleEnterButtonClick(mealTypeSelect, mealInput) {
 async function submitMealData(mealType, items) {
     document.getElementById('nutritionalValue').textContent = 'Loading...';
     const userEmail = sessionStorage.getItem('email');
+    
     try {
 
         const response = await fetch('/api/enterFood', {
@@ -63,10 +65,11 @@ async function submitMealData(mealType, items) {
         if (response.ok) {
             const data = await response.json();
             console.log(data.message);
+
             const enteredMeal = data.mealExistance;
             console.log(enteredMeal);
+
             const nutrientsDetails = data.nutrients;
-            console.log(nutrientsDetails);
             let nutrientText = '';
             nutrientText = formatNutrientDetails(nutrientsDetails);
             if (!enteredMeal){

@@ -39,9 +39,12 @@ apiRouter.post('/createAcnt', async (req, res) => {
     password : password
   };
 
-  DB.addUser(newUser)
-
-  res.send({message: 'Account created successfully!', user: {email} });
+  try {
+    await DB.addUser(newUser);
+    res.send({message: 'Account created successfully!', user: {email} });
+  } catch (error) {
+    res.status(500).send({message: 'Error creating account'});
+  }
   
 });
 
@@ -68,7 +71,7 @@ apiRouter.post('/enterFood', async (req, res) => {
   //store it in the table and send it to nutrient api
   const { mealType, items, userEmail } = req.body;
 
-  const mealExistance = null;
+  let mealExistance = null;
 
   if (!mealType || !items || !Array.isArray(items)) {
       return res.status(400).send({ message: 'Invalid food entry' });
@@ -116,7 +119,7 @@ apiRouter.post('/mealTypeLog', async (req, res) =>{
   const {mealType, userEmail} = req.body;
   try {
     const mealTypeLogs = await DB.getMeal(mealType, userEmail);
-  res.send(mealTypeLogs);
+    res.send(mealTypeLogs);
   }catch (error){
     res.status(500).send({ message: 'Error retrieving meal data' });
   }
