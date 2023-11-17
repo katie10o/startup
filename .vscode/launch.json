@@ -12,9 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${file}"
-            // "env" : {
-            //     "OPENAI_API_KEY" : "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"
-            // }
+            
         }
     ]
 }
