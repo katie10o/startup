@@ -17,8 +17,9 @@ function initializeEventListeners() {
     const enterMealRecord = document.getElementById("enter-daily-meal")
     const enterSuggestionsBtn = document.getElementById("enter-suggestions");
     const nutrientTypeSelect = document.getElementById("nuts_type");
+    const logout = document.getElementById("logout");
 
-
+    logout.addEventListener("click", () => handleLogoutBtn());
     mealTypeSelect.addEventListener("change", () => handleMealTypeChange(mealTypeSelect, mealInput));
     enterBtn.addEventListener("click", () => handleEnterButtonClick(mealTypeSelect, mealInput));
     enterMealRecord.addEventListener("click", () => handleEnterDailyMealClick(mealTypeRecord))
@@ -32,6 +33,12 @@ function handleMealTypeChange(mealTypeSelect, mealInput) {
     } else {
         mealInput.style.display = "none";
     }
+}
+async function handleLogoutBtn() {
+    localStorage.removeItem('email');
+    fetch(`/api/logout`, {
+      method: 'delete',
+    }).then(() => (window.location.href = 'index.html'));
 }
 
 async function handleEnterButtonClick(mealTypeSelect, mealInput) {

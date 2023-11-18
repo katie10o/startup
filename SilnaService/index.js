@@ -1,7 +1,11 @@
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const { OpenAI } = require("openai");
 require ("dotenv").config();
 const DB = require('./database.js');
+
+const authCookieName = 'token';
 
 const app = express();
 
@@ -13,10 +17,12 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
+app.use(cookieParser());
 
 // Serve up the frontend static content hosting
 // need to take this string out and just do public
 app.use(express.static('public'));
+app.set('trust proxy', true);
 
 // Router for service endpoints
 const apiRouter = express.Router();
@@ -30,41 +36,38 @@ apiRouter.post('/createAcnt', async (req, res) => {
   
   const exists = await DB.accountVerify(email);
   if (exists) {
-    return res.status(400).send({message: "email is taken"});
+    return res.status(409).send({message: "email is taken"});
   }
 
-  const newUser = {
-    firstName : firstName,
-    lastName : lastName,
-    email : email,
-    password : password
-  };
-
   try {
-    await DB.addUser(newUser);
+    const user = await DB.addUser(firstName, lastName, email, password);
+    setAuthCookie(res, user.token);
+
     res.send({message: 'Account created successfully!', user: {email} });
+    
   } catch (error) {
     res.status(500).send({message: 'Error creating account'});
   }
   
 });
 
+apiRouter.delete('/logout', (_req, res) => {
+  res.clearCookie(authCookieName);
+  res.status(204).end();
+});
+
 apiRouter.post('/login', async (req, res) => {
 //authenticating the user
 const { email, password } = req.body;
 const matchedEmail = await DB.accountVerify(email)
-try {
-  if (!matchedEmail) {
-    return res.status(404).send({message: 'Invalid email'});
+if (matchedEmail) {
+  if (await bcrypt.compare(password, matchedEmail.password)) {
+    setAuthCookie(res, matchedEmail.token);
+    res.send({message: 'Success logging in!', user: {email}});
+    return;
   }
-  if (matchedEmail.password !== password){
-    return res.status(404).send({message: 'Invalid password'});
-  }
-  res.send({message: 'Success logging in!', user: {email}});
-} catch (error){
-  res.status(500).send({message: "an arror occurred"})
 }
-
+res.status(401).send({ msg: 'Unauthorized' });
 });
 
 apiRouter.post('/enterFood', async (req, res) => {
@@ -179,6 +182,14 @@ apiRouter.post('/enteredNutrients', async (req, res) => {
       return res.status(500).send({ message: 'Error processing nutrient entry' });
   }
 });
+
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {

@@ -8,21 +8,20 @@ document.addEventListener("DOMContentLoaded", function() {
 });
  
 async function login() {
-  const loginData = {
-    email : document.getElementById("userID").value,
-    password : document.getElementById("password").value
-  }
+    const email = document.getElementById("userID").value;
+    const password = document.getElementById("password").value;
+  
   const response = await fetch('/api/login',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/JSON'
     },
-    body: JSON.stringify(loginData)
+    body: JSON.stringify({email, password})
   });
   const data = await response.json();
 
   if (data.message === 'Success logging in!') {
-    sessionStorage.setItem("email", loginData.email);
+    sessionStorage.setItem("email", email);
     window.location.href = "silna_main.html";
   } else {
     console.error('Login Failed:', data.message);
@@ -31,5 +30,5 @@ async function login() {
   }
 
 function createAcnt(){
-  window.location.href = "signup.html"
+  window.location.href = "signup.html";
 }

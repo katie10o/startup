@@ -28,6 +28,7 @@ async function submitAccountCreation() {
         submitLogin();
     } else {
         console.error('Signup failed:', data.message);
+        alert('signin Failed: ' + data.message);
     }
 }
 

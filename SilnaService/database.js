@@ -1,5 +1,7 @@
 const { MongoClient } = require('mongodb');
 const config = require('./dbConfig.json');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
@@ -21,9 +23,20 @@ function accountVerify(email){
 }
 
 
-async function addUser(person){
-  const result = await userData.insertOne(person)
-  return result
+async function addUser(firstName, lastName, email, password){
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userData.insertOne(user);
+
+  return user;
+
 }
 
 async function mealChecker(meal, userEmail) {
