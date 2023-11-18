@@ -1,47 +1,33 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const userEmail = sessionStorage.getItem("email");
     document.getElementById("userEmail").textContent = userEmail;
+    const logoutBtn = document.getElementById("logout");
 
-    const nameDisplay = document.getElementById("nameDisplay");
-    const emailDisplay = document.getElementById("emailDisplay");
-    const passwordDisplay= document.getElementById("passwordDisplay");
-    const nameEdit = document.getElementById("nameEdit");
-    const emailEdit = document.getElementById("emailEdit");
-    const passEdit = document.getElementById("passEdit");
-    const editBtn = document.getElementById("editBtn");
-    const saveBtn = document.getElementById("saveBtn");
-    const passText = "*************";
+    logoutBtn.addEventListener("click", () => handleLogoutBtn());
 
-    editBtn.addEventListener("click", function() {
-        nameDisplay.style.display = "none";
-        emailDisplay.style.display = "none";
-        passwordDisplay.style.display = "none";
-        editBtn.style.display = "none";
 
-        nameEdit.style.display = "block";
-        emailEdit.style.display = "block";
-        passEdit.style.display = "block";
-        saveBtn.style.display = "block";
+    const response = await fetch(`api/settings?email=${userEmail}`);
 
-        nameEdit.value = nameDisplay.textContent;
-        emailEdit.value = emailDisplay.textContent;
-        passEdit.value = passwordDisplay.textContent;
-    });
+    if (response.ok){
+        const data = await response.json();
+        console.log(data);
 
-    saveBtn.addEventListener("click", function() {
-        nameDisplay.textContent = nameEdit.value;
-        emailDisplay.textContent = emailEdit.value;
-        passwordDisplay.textContent = passText;
+        document.getElementById("firstName").textContent = data.userInfo.firstName;
+        document.getElementById("lastName").textContent = data.userInfo.lastName;
+        document.getElementById("emailDisplay").textContent = userEmail;
 
-        nameEdit.style.display = "none";
-        emailEdit.style.display = "none";
-        passEdit.style.display = "none";
-        saveBtn.style.display = "none";
 
-        nameDisplay.style.display = "block";
-        emailDisplay.style.display = "block";
-        passwordDisplay.style.display = "block";
-        editBtn.style.display = "block";
 
-    });
+    } else {
+        console.error('Failed to retrieve user info');
+    }
+
+
 });
+
+async function handleLogoutBtn() {
+    localStorage.removeItem('email');
+    fetch(`/api/logout`, {
+      method: 'delete',
+    }).then(() => (window.location.href = 'index.html'));
+}

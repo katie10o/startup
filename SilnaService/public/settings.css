@@ -32,20 +32,21 @@ html, body {
     flex-direction: column;
     background-color: #DED1BD;
     display: flex;
-    align-items: center;
-}
-.flex.activity p{
+    align-items: left;
     font-size: 20px;
-    margin-left: 50px;
+}
+.flex.activity.edit {
+    padding-left: 20px;
+
 }
 .flex.activity button {
-    font-size: 10px;
-    margin-left: 50px;
-    width: 200px;
-    margin-bottom: 10px;
     background-color: #c49c56;
-}
-button a{
-    color: #000;
+    font-size: 20px;
+    width: 150px;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
     text-decoration: none;
+    color: #000;
+
 }

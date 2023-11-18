@@ -183,6 +183,16 @@ apiRouter.post('/enteredNutrients', async (req, res) => {
   }
 });
 
+apiRouter.get('/settings', async (req, res) => {
+  const email = req.query.email;
+  const userInfo = await DB.getUserInfo(email);
+  if (userInfo){
+    res.send({message: "success retrieving user info", userInfo});
+  } else {
+  return res.status(500).send({ message: 'Error retrieving user info' });
+  }
+});
+
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
     secure: true,

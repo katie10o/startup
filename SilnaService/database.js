@@ -97,5 +97,10 @@ async function getMeal(mealType, userEmail) {
   }
   return false;
 }
+async function getUserInfo(email){
+  const query = {email: email};
+  const userInfo = await userData.findOne(query);
+  return userInfo;
+ }
 
-module.exports = { deleteMeal, mealChecker, accountVerify, addUser, addMeal, getMeal };
+module.exports = { getUserInfo, deleteMeal, mealChecker, accountVerify, addUser, addMeal, getMeal };
