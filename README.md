@@ -65,5 +65,11 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 - I have endpoints that store create account data (first and last name, user email, and password (will implement hash password next)), and meals that they enter. Only one meal can be entered per category per day, so the user can delete a previous meal and add a new one (it will delete the meal entry on the database as well).
 - user information and meal inputs are stored and accessed through the mongoDB
 
+### Login Deliverable
+- User is able to register - which creates a new user into the database 
+- If the user has already registered, then the meals added will only be under their account
+- MongoDB stores all the credentials, the password is crypted to be a hash only 
+- Restricts functionality, if the user has invaild credentials, it will not allow them to move further on
+
 
 
