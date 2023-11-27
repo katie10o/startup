@@ -4,13 +4,14 @@ const express = require('express');
 const { OpenAI } = require("openai");
 require ("dotenv").config();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
+
 
 const authCookieName = 'token';
 
 const app = express();
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-console.log(openai)
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -206,6 +207,8 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
