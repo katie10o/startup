@@ -129,8 +129,12 @@ footer.logout{
     max-width: 500px; 
     margin: 10px 0; 
 }
-.activity.disclaimer {
-    padding-top: 100px;
+.activity.msg{
+    padding-top: 50px;
+}
+
+.activity.disclaimer{
+    padding-top: 50px;
 }
 
 

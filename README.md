@@ -71,5 +71,12 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 - MongoDB stores all the credentials, the password is crypted to be a hash only 
 - Restricts functionality, if the user has invaild credentials, it will not allow them to move further on
 
+### WebSocket Deliverable
+- The server side listens for WebSocket connection
+- The Front end listens for WebSocket connection
+- Data from the entered meals portion is being sent over with WebSocket connection
+- Realtime updates when users add meals - however, it posts 4 times and I am unsure why.. 
+
+
 
 

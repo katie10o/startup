@@ -2,7 +2,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const { OpenAI } = require("openai");
-require ("dotenv").config();
+require('dotenv').config();
 const DB = require('./database.js');
 const { peerProxy } = require('./peerProxy.js');
 
@@ -12,6 +12,7 @@ const authCookieName = 'token';
 const app = express();
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
+console.log(openai)
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;

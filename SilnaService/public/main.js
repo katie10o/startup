@@ -25,6 +25,9 @@ function initializeEventListeners() {
     enterMealRecord.addEventListener("click", () => handleEnterDailyMealClick(mealTypeRecord))
     enterSuggestionsBtn.addEventListener("click", () => handleEnterSuggestionsClick(nutrientTypeSelect));
 
+    this.configureWebSocket();
+
+
 }
 
 function handleMealTypeChange(mealTypeSelect, mealInput) {
@@ -43,6 +46,9 @@ async function handleLogoutBtn() {
 
 async function handleEnterButtonClick(mealTypeSelect, mealInput) {
     const enterBtn = document.getElementById("enter-meal");
+
+
+
     enterBtn.disabled = true;
 
     const enteredMeal = mealInput.value.trim();
@@ -82,6 +88,8 @@ async function submitMealData(mealType, items) {
 
             document.getElementById('mealAlreadyEntered').textContent = message;
             document.getElementById('nutritionalValue').innerHTML = nutrientText;
+
+            broadcastEvent(items.join(', '));
         }
     } catch (error) {
         console.error("Error entering food: ", error);
@@ -213,3 +221,36 @@ function formatNutrientDetails(details) {
     }
     return formattedText;
 }
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      this.displayMsg('system', 'user', 'connected');
+    };
+    this.socket.onclose = (event) => {
+      this.displayMsg('system', 'user', 'disconnected');
+    };
+    this.socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      if (msg.type === 'meal_input') {
+        this.displayMsg('meal: ', msg.from, `added a new meal: ${msg.mealName}`);
+      } 
+    };
+  }
+
+  function displayMsg(cls, from, msg) {
+    const messageElement = document.querySelector('#message');
+    messageElement.innerHTML =
+      `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + messageElement.innerHTML;
+  }
+
+ function broadcastEvent(mealName) {
+    const userEmail = sessionStorage.getItem("email");
+    const event = {
+      from: userEmail,
+      type: "meal_input",
+      mealName: mealName,
+    };
+    this.socket.send(JSON.stringify(event));
+  }
+
