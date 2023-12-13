@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+        <div id="rootpg">
+            <script type="text/babel">  
+                function Welcome(props) {
+                  return <h1>Hello, {props.name}</h1>;
+                }
+                function Goodbye(props){
+                    return <h4>Goodbye, {props.surname}</h4>
+                }
+                function App() {
+                  return (
+                    <div>
+                      <Welcome name="Sara" />
+                      <Welcome name="Cahal" />
+                      <Welcome name="Edite" />
+                      <Goodbye surname="klabacka" />
+                      <Goodbye surname="curtis" />
+                      <Goodbye surname="peterson" />
+                    </div>
+                    
+                  );
+                }
+                const root = ReactDOM.createRoot(document.getElementById('rootpg'));
+                root.render(<App />);
+                </script>
+        </div>
+  </body>
+</html>

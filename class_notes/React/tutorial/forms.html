@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">  
+
+        function NameForm() {
+        const [state, setState] = React.useState('');
+
+        function handleChange(event) {
+            setState(event.target.value);
+        }
+
+        function handleSubmit(event) {
+            alert('A name was submitted: ' + state);
+            event.preventDefault();
+        }
+
+        return (
+            <form onSubmit={handleSubmit}>
+            <label>
+                Name:
+                <input type="text" value={state} onChange={handleChange} />
+            </label>
+            <input type="submit" value="Submit" />
+            </form>
+        );
+        }
+    
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<NameForm />);
+    </script>
+  </body>
+</html>
