@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     logoutBtn.addEventListener("click", () => handleLogoutBtn());
 
 
-    const response = await fetch(`api/settings?email=${userEmail}`);
+    const response = await fetch(`http://localhost:4000api/settings?email=${userEmail}`);
 
     if (response.ok){
         const data = await response.json();

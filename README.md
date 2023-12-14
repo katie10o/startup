@@ -78,5 +78,14 @@ Silna makes monitoring your health more rewarding. Instead of focusing on the ty
 - Realtime updates when users add meals - however, it posts 4 times and I am unsure why.. 
 
 
+### React
+- Bundled and transpiled - done!
+- Components - Login, Signup, Main (which has 5 additional sub components), and settings are all components.
+- Router - Routing between login, settings, main, and sign up components.
+- Hooks - UseState for all inputed fields (username, password, entered meal, food suggestions).
+- I had a hard time getting my WebSocket Deliverable to work... It's about 50/50 functional now
+- My CSS got a little off on the main page and I ran out of energy to fix it... 
+
+
 
 

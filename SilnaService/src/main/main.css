@@ -6,9 +6,16 @@ html, body {
 }
 
 .main_flex {
+    
     flex-direction: column;
     display: flex;
     height: 100%;
+    background-color: #DED1BD
+}
+.content_container {
+    padding-left: 60px; /* Pushes content to the right */
+    margin: 20px 0; /* Vertical margin for spacing */
+    max-width: 800px; /* Adjust as needed */
 }
 .flex.nav {
     display: flex;
@@ -19,9 +26,10 @@ html, body {
 }
 .flex.nav h4{
     padding-left: 10px;
+    font-size: 25px;
 }
 .nav_links {
-    justify-content: end;
+    justify-content: flex-end;
 }
 .nav_links a{
     padding-right: 20px;

@@ -5,11 +5,18 @@ const { OpenAI } = require("openai");
 require('dotenv').config();
 const DB = require('./database.js');
 const { peerProxy } = require('./peerProxy.js');
+const cors = require('cors');
+
+
 
 
 const authCookieName = 'token';
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:5173' // Replace with your frontend's origin
+}));
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 console.log(openai)

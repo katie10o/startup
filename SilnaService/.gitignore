@@ -1,3 +1,4 @@
 .env
 dbConfig.json
 node_modules
+.vscode

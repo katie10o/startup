@@ -1,14 +1,4 @@
 
-/* colors: 
-#c49c56 - djon mustard yellow
-#871a37 - maroon
-#DED1BD - sand beige
-#d2d4d3 - off white
-#000000 - black
-#a79990 - grey
-#008080 - teal
-*/
-
 html, body {
     height: 100%;
     margin: 0;
@@ -52,12 +42,12 @@ html, body {
     flex-direction: column;
     display: flex;
 }
-.activity.right input {
+.activity.right form {
     margin-top: 5px;
     margin-bottom: 5px;
     width: 300px;
 }
-.activity.right button {
+.activity.right form .btn {
     margin-top: 5px;
     margin-bottom: 5px;
     width: 300px;
@@ -91,9 +81,65 @@ button a {
 }
 @media (max-width: 768px) {
     .activity.left img {
-        display: none;
         max-width: 100%; 
         max-height: 300px; 
+    }
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+.form-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Align form elements in a column */
+    align-items: center; /* Center align the items */
+}
+
+.form-container form {
+    width: 75%; /* Set the width of the form */
+}
+
+.form-container input,
+.form-container button {
+    width: 100%; /* Full width of the container */
+    padding: 10px; /* Add some padding for better appearance */
+    margin: 5px 0; /* Add margin for spacing between elements */
+    font-size: 18px; /* Increase the font size */
+    border: 1px solid #ccc; /* Optional: add border to input fields */
+}
+
+.form-container button {
+    background-color: #c49c56;
+    color: white; /* Text color for buttons */
+    border: none; /* Remove border for buttons */
+    cursor: pointer; /* Cursor change to indicate clickable */
+}
+
+.form-container, .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    padding: 20px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Adjusting media query for responsiveness */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+    
+    .image-container {
+        order: -1; /* This will make the image appear above the form on smaller screens */
     }
 }
 
